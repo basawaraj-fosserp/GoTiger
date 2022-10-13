@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include gotiger *.css
+recursive-include gotiger *.csv
+recursive-include gotiger *.html
+recursive-include gotiger *.ico
+recursive-include gotiger *.js
+recursive-include gotiger *.json
+recursive-include gotiger *.md
+recursive-include gotiger *.png
+recursive-include gotiger *.py
+recursive-include gotiger *.svg
+recursive-include gotiger *.txt
+recursive-exclude gotiger *.pyc
