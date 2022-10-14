@@ -10,9 +10,9 @@ def validate(doc,method):
             'conversion_factor':doc.units_per_case
         })
 
-    doc.case_volume_in_l = (doc.case_dimension_length*doc.case_dimension_width*doc.case_dimension_height)/1000
-    if doc.units_per_case != 0:
-        doc.unit_volume_in_l = doc.case_volume_in_l/doc.units_per_case
+    # doc.case_volume_in_l = (doc.case_dimension_length*doc.case_dimension_width*doc.case_dimension_height)/1000
+    # if doc.units_per_case != 0:
+    #     doc.unit_volume_in_l = doc.case_volume_in_l/doc.units_per_case
 
     for barcode in doc.barcodes:
         if len(barcode.barcode) >= 12:

@@ -2,29 +2,37 @@ frappe.ui.form.on('Item', {
 	refresh(frm) {
 		// your code here
 	},
-	validate(frm){
-	    if(frm.doc.assortment_status =="Deactivated"){
-            frm.set_value('end_date',frappe.datetime.nowdate());
-            frm.refresh_field('end_date');
+	validate(cur_frm){
+	    if(cur_frm.doc.assortment_status =="Deactivated"){
+            cur_frm.set_value('end_date',frappe.datetime.nowdate());
+            cur_frm.refresh_field('end_date');
         }
-	},
-	after_save(frm){
-	    if(frm.doc.units_per_case){
-            var tbl = frm.doc.uoms;
+        if(cur_frm.doc.units_per_case === 0){
+            var tbl = cur_frm.doc.uoms;
                     var i = tbl.length;
                     while (i--)
                     {
-                        if(frm.doc.units_per_case === 0)
+                        if(cur_frm.doc.units_per_case === 0)
                         {
-                            frm.get_field("uoms").grid.grid_rows[i].remove();
+                            cur_frm.get_field("uoms").grid.grid_rows[i].remove();
                         }
                     }
-                    frm.refresh_field("uoms");
-	    }        
-        frm.doc.uoms.forEach(u =>{
+                    cur_frm.refresh_field("uoms");
+	    } 
+        cur_frm.set_value('case_volume_in_l',flt(cur_frm.doc.case_dimension_length*cur_frm.doc.case_dimension_width*cur_frm.doc.case_dimension_height)/1000)  
+        cur_frm.refresh_field('case_volume_in_l') 
+        if(cur_frm.doc.units_per_case != 0){
+            cur_frm.set_value('unit_volume_in_l',flt(cur_frm.doc.case_volume_in_l/cur_frm.doc.units_per_case))  
+            cur_frm.refresh_field('unit_volume_in_l')
+        }
+        
+	},
+	after_save(cur_frm){
+        cur_frm.doc.uoms.forEach(u =>{
             if(u.uom =="Case"){
                 u.conversion_factor = frm.doc.units_per_case;
             }
+            cur_frm.refresh_field("uoms");
         }); 
         
         
