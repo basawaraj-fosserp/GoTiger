@@ -102,6 +102,9 @@ doctype_js = {
 doc_events = {
 	"Item":{
 		"validate":"gotiger.gotiger.doctypes_triggers.item.item.validate"
+	},
+	"Item Price":{
+		"validate":"gotiger.gotiger.doctypes_triggers.item_price.item_price.validate"
 	}
 }
 
@@ -138,7 +141,7 @@ fixtures = [
 	{"dt": "Custom Field", "filters": [
         [
             "name", "in", [
-                "Item-temperature_zone","Item-shopify_running_number","Item-description_german","Item-launch_date","Item-column_break_30","Item-other_details","Item-case_dimension_length","Item-case_dimension_width","Item-case_dimension_height","Item-column_break_55","Item-unit_dimension_length","Item-unit_dimension_width","Item-unit_dimension_height","Item-case_volume_in_l","Item-unit_volume_in_l","Item-case_weight_in_g","Supplier-payment_type","Item-commercial_name_in_german","Item-main_category","Item Supplier-pallet_factor","Item-class_of_fruit_and_veg","Item-packaging_weight","Item-unit_weight","Item-case_weight","Item-pallet_weight","Item-intrastat_code","Item-gt_country_of_origin","Item-gt_cuisine","Item-product_claim","Item-assortment_status","Item-shopify_published_status","Item-shopify_status","Item-unit_size_volume","Item-unit_measure","Item Supplier-layer_factor","Item-warehouse_shelf_life","Item-store_shelf_life","Item-customer_shelf_life","Purchase Order-delivery_time","Item Group-temperature_zone","Item-units_per_case","Item-end_date","Item-gt_packaging","Item Barcode-packaging_bar_code"
+                "Item-temperature_zone","Item-shopify_running_number","Item-description_german","Item-launch_date","Item-column_break_30","Item-other_details","Item-case_dimension_length","Item-case_dimension_width","Item-case_dimension_height","Item-column_break_55","Item-unit_dimension_length","Item-unit_dimension_width","Item-unit_dimension_height","Item-case_volume_in_l","Item-unit_volume_in_l","Item-case_weight_in_g","Supplier-payment_type","Item-commercial_name_in_german","Item-main_category","Item Supplier-pallet_factor","Item-class_of_fruit_and_veg","Item-packaging_weight","Item-unit_weight","Item-case_weight","Item-pallet_weight","Item-intrastat_code","Item-gt_country_of_origin","Item-gt_cuisine","Item-product_claim","Item-assortment_status","Item-shopify_published_status","Item-shopify_status","Item-unit_size_volume","Item-unit_measure","Item Supplier-layer_factor","Item-warehouse_shelf_life","Item-store_shelf_life","Item-customer_shelf_life","Purchase Order-delivery_time","Item Group-temperature_zone","Item-units_per_case","Item-end_date","Item-gt_packaging","Item Barcode-packaging_bar_code","Item-description_german","Item-item_price"
             ]
         ]
     ]},
