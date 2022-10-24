@@ -1,6 +1,5 @@
 import frappe
 from frappe import _
-from frappe.utils import today
 
 def validate(doc,method):
     uom_value = 'Case'
@@ -11,8 +10,7 @@ def validate(doc,method):
             'conversion_factor':doc.units_per_case
         })
 
-    # if doc.case_dimension_length != 0 and doc.case_dimension_width != 0 and doc.case_dimension_height != 0:
-    #     doc.case_volume_in_l = (doc.case_dimension_length*doc.case_dimension_width*doc.case_dimension_height)/1000
+    # doc.case_volume_in_l = (doc.case_dimension_length*doc.case_dimension_width*doc.case_dimension_height)/1000
     # if doc.units_per_case != 0:
     #     doc.unit_volume_in_l = doc.case_volume_in_l/doc.units_per_case
 
@@ -21,4 +19,4 @@ def validate(doc,method):
             barcode.barcode_type = "UPC-A"
         if len(barcode.barcode) >= 13:
             # frappe.msgprint(str(barcode.barcode))
-            barcode.barcode_type = "EAN"    
+            barcode.barcode_type = "EAN"
