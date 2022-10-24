@@ -21,7 +21,8 @@ app_license = "MIT"
 # web_include_js = "/assets/gotiger/js/gotiger.js"
 
 doctype_js = {
-	"Item":"custom_script/item.js"
+	"Item":"custom_script/item.js",
+	"Purchase Order":"custom_script/purchase_order.js"
 	}
 
 # include custom scss in every website theme (without file extension ".scss")
