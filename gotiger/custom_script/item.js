@@ -66,14 +66,7 @@ frappe.ui.form.on('Item', {
 	    }  
         
         
-        if(cur_frm.doc.brand && cur_frm.doc.description && cur_frm.doc.unit_size_volume && cur_frm.doc.unit_measure){
-            let terms = cur_frm.doc.description.replace("{{cur_frm.doc.description}}",cur_frm.doc.description);
-            console.log(convertToPlain(terms))
-            cur_frm.set_value('item_name',cur_frm.doc.brand + " " + terms + " "+cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
-            cur_frm.refresh_field('item_name')
-            cur_frm.set_value('commercial_name_in_german',cur_frm.doc.brand + " " +cur_frm.doc.description_german + " "+ cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
-            cur_frm.refresh_field('commercial_name_in_german')
-            }
+        
         // else{
         //     cur_frm.set_value('item_name',cur_frm.doc.naming_series)
         //     cur_frm.refresh_field('item_name')
@@ -86,7 +79,7 @@ frappe.ui.form.on('Item', {
             cur_frm.refresh_field('case_volume_in_l')
         }
         if (cur_frm.doc.unit_volume_in_l != 0){
-            cur_frm.set_value('doc.unit_volume_in_l',flt(doc.case_volume_in_l/doc.units_per_case))
+            cur_frm.set_value('unit_volume_in_l',flt(cur_frm.doc.case_volume_in_l/cur_frm.doc.units_per_case))
             cur_frm.refresh_field('unit_volume_in_l')
         }
         
@@ -102,7 +95,17 @@ frappe.ui.form.on('Item', {
         }); 
         
         
-        }
+        },
+     before_save(cur_frm){
+        if(cur_frm.doc.brand && cur_frm.doc.description && cur_frm.doc.unit_size_volume && cur_frm.doc.unit_measure && cur_frm.doc.description_german){
+            let description_value = convertToPlain(cur_frm.doc.description)
+            // console.log(description_value)
+            cur_frm.set_value('item_name',cur_frm.doc.brand + " " + description_value  + " "+cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
+            cur_frm.refresh_field('item_name')
+            cur_frm.set_value('commercial_name_in_german',cur_frm.doc.brand + " " +cur_frm.doc.description_german + " "+ cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
+            cur_frm.refresh_field('commercial_name_in_german')
+            }
+     }   
 });
 
 
