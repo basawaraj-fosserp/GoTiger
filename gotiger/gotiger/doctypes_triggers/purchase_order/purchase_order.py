@@ -16,7 +16,7 @@ def append_items(supplier, name):
     for plan in plans:
         # Fetch the purchase_uom and stock_uom
         purchase_uom, stock_uom = frappe.db.get_value('Item', {
-            'item_code': plan.item_code
+            'item_code': plan.item
         }, ['purchase_uom', 'stock_uom'])
 
         if not purchase_uom:
@@ -25,14 +25,14 @@ def append_items(supplier, name):
         
         # Fetch the conversion factor from the purchase_uom
         conversion = frappe.db.get_value('UOM Conversion Detail', {
-            'parent': plan.item_code, 
+            'parent': plan.item, 
             'uom': purchase_uom
         }, 'conversion_factor') or 1.0
         
         try:
             actual_qty, ordered_qty = frappe.db.get_value('Bin', {
                 'warehouse': plan.warehouse,
-                'item_code': plan.item_code
+                'item_code': plan.item
             }, ['actual_qty', 'ordered_qty'])
         except ValueError as e:
             # This happen, when the item have no registry in stock yet
@@ -52,11 +52,11 @@ def append_items(supplier, name):
             continue
 
         # Verify if PO already have the item
-        if (d := doc.get('items', {'item_code': plan.item_code})):
+        if (d := doc.get('items', {'item_code': plan.item})):
             d = d[0]
         else:
             # Othewise create a new line
-            d = doc.append('items', {'item_code': plan.item_code})
+            d = doc.append('items', {'item_code': plan.item})
         
         # Set the item values to initiate the transaction
         d.update({
