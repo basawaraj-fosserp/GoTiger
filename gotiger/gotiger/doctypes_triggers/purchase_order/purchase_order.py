@@ -52,8 +52,10 @@ def append_items(supplier,name):
                     else:
                         frappe.throw("Qty value Can Not Be Negative")    
                 else:
+                    #qty_value[0]['remain_qty'] + frappe.db.get_value('Bin',{'warehouse':item_doc.warehouse,'item_code':item_doc.item},'actual_qty')
+                    value_qty = qty_value[0]['remain_qty'] if ((not qty_value[0]['remain_qty'] is None) and (len(qty_value[0]['remain_qty']) > 0)) else 0
                     # item.qty = qty_value[0]['remain_qty'] + frappe.db.get_value('Bin',{'warehouse':item_doc.warehouse,'item_code':item_doc.item},'actual_qty')-((item_doc.sales_velocity*item_doc.lead_time_in_days)-(item_doc.sales_velocity*item_doc.coverage_days))
-                    item.qty = ((item_doc.sales_velocity*item_doc.lead_time_in_days)+(item_doc.sales_velocity*item_doc.coverage_days)) - (qty_value[0]['remain_qty'] + frappe.db.get_value('Bin',{'warehouse':item_doc.warehouse,'item_code':item_doc.item},'actual_qty')-((item_doc.sales_velocity*item_doc.lead_time_in_days)-(item_doc.sales_velocity*item_doc.coverage_days)))
+                    item.qty = ((item_doc.sales_velocity*item_doc.lead_time_in_days)+(item_doc.sales_velocity*item_doc.coverage_days)) - (value_qty + frappe.db.get_value('Bin',{'warehouse':item_doc.warehouse,'item_code':item_doc.item},'actual_qty')-((item_doc.sales_velocity*item_doc.lead_time_in_days)-(item_doc.sales_velocity*item_doc.coverage_days)))
                     item.rate = frappe.db.get_value('Item Price',{'price_list':purchase_doc.buying_price_list,'item_code':item_doc.item},'price_list_rate')
                     item.price_list_rate = frappe.db.get_value('Item Price',{'price_list':purchase_doc.buying_price_list,'item_code':item_doc.item},'price_list_rate')
                     item.base_price_list_rate = frappe.db.get_value('Item Price',{'price_list':purchase_doc.buying_price_list,'item_code':item_doc.item},'price_list_rate')
