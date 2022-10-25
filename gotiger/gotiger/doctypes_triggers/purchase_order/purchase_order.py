@@ -34,7 +34,7 @@ def append_items(supplier, name):
                 'warehouse': plan.warehouse,
                 'item_code': plan.item
             }, ['actual_qty', 'ordered_qty'])
-        except ValueError as e:
+        except TypeError as e:
             # This happen, when the item have no registry in stock yet
             # no stock transaction, no transfer, no receive, nothing
             # probably this is a fresh item
