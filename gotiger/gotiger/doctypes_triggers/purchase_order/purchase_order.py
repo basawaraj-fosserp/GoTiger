@@ -1,5 +1,6 @@
 
 import frappe
+from frappe.utils import flt
 import math
 
 @frappe.whitelist()
@@ -48,10 +49,29 @@ def append_items(supplier, name):
         #  items on transit (ordered but not received yet)
         qty -= (actual_qty + ordered_qty)
 
-        # We divide everything by the conversion factor
-        qty /= conversion
-        qty = math.ceil(qty)
-
+        # Divide everything by the conversion factor
+        qty /= conversion # 4.73
+                
+        # Calculate the floor qty
+        base_qty = math.floor(qty) # 4.0
+        
+        # Calculate the difference between the actual qty and the floor qty
+        diff = flt(qty - base_qty, 2) # 4.73 - 4. = 0.73
+        
+        # We calculate the ratio of the diff against the conversion amount
+        ratio = (diff * conversion_factor) / 100.0
+        # ratio = (.73 * 20.) / 100. = 0.046
+        
+        if 0 < qty < 1:
+            # If we are buing just 1 Case but ratio is fractional, eg "0.48", ensure 1 unit 
+            qty = 1
+        elif ratio >= 0.10:
+            # If the ratio is higher than 10% of the conversion factor, round up
+            qty = math.ceil(qty)
+        else:
+            # Othewise round down
+            qty = base_qty
+        
         if qty < 0:
             # We have enought stock, so nothing to do here
             continue
