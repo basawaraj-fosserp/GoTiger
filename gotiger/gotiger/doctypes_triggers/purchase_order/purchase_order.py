@@ -59,7 +59,7 @@ def append_items(supplier, name):
         diff = flt(qty - base_qty, 2) # 4.73 - 4. = 0.73
         
         # We calculate the ratio of the diff against the conversion amount
-        ratio = (diff * conversion_factor) / 100.0
+        ratio = (diff * conversion) / 100.0
         # ratio = (.73 * 20.) / 100. = 0.046
         
         if 0 < qty < 1:
