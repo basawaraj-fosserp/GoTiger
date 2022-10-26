@@ -1,5 +1,6 @@
 
 import frappe
+import math
 
 @frappe.whitelist()
 def append_items(supplier, name):
@@ -49,6 +50,7 @@ def append_items(supplier, name):
 
         # We divide everything by the conversion factor
         qty /= conversion
+        qty = math.ceil(qty)
 
         if qty < 0:
             # We have enought stock, so nothing to do here
