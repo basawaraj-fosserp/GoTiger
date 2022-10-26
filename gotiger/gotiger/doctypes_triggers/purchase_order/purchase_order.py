@@ -43,7 +43,7 @@ def append_items(supplier, name):
             actual_qty, ordered_qty = 0, 0
 
         # We compute how many in the next days
-        qty = (plan.sales_velocity + plan.coverage_days) * plan.lead_time_in_days
+        qty = (plan.lead_time_in_days + plan.coverage_days) * plan.sales_velocity
         
         # we reduce the actual stock and the
         #  items on transit (ordered but not received yet)
