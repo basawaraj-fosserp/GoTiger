@@ -48,7 +48,7 @@ def append_items(supplier, name):
         qty -= (actual_qty + ordered_qty)
 
         # We divide everything by the conversion factor
-        qty /= conversion_factor
+        qty /= conversion
 
         if qty < 0:
             # We have enought stock, so nothing to do here
