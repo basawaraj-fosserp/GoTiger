@@ -65,7 +65,7 @@ def append_items(supplier, name):
         if 0 < qty < 1:
             # If we are buing just 1 Case but ratio is fractional, eg "0.48", ensure 1 unit 
             qty = 1
-        elif ratio >= 0.10:
+        elif diff >= 0.10:
             # If the ratio is higher than 10% of the conversion factor, round up
             qty = math.ceil(qty)
         else:
