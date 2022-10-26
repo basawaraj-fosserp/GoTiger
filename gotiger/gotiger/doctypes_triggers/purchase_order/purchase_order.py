@@ -47,6 +47,9 @@ def append_items(supplier, name):
         #  items on transit (ordered but not received yet)
         qty -= (actual_qty + ordered_qty)
 
+        # We divide everything by the conversion factor
+        qty /= conversion_factor
+
         if qty < 0:
             # We have enought stock, so nothing to do here
             continue
