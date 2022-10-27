@@ -72,7 +72,7 @@ def append_items(supplier, name):
             # Othewise round down
             qty = base_qty
         
-        if qty < 0:
+        if qty <= 0:
             # We have enought stock, so nothing to do here
             continue
 
