@@ -103,9 +103,6 @@ doctype_js = {
 doc_events = {
 	"Item":{
 		"validate":"gotiger.gotiger.doctypes_triggers.item.item.validate"
-	},
-	"Item Price":{
-		"validate":"gotiger.gotiger.doctypes_triggers.item_price.item_price.validate"
 	}
 }
 
