@@ -96,16 +96,16 @@ frappe.ui.form.on('Item', {
         
         
         },
-     before_save(cur_frm){
-        if(cur_frm.doc.brand && cur_frm.doc.description && cur_frm.doc.unit_size_volume && cur_frm.doc.unit_measure && cur_frm.doc.description_german){
-            let description_value = convertToPlain(cur_frm.doc.description)
-            // console.log(description_value)
-            cur_frm.set_value('item_name',cur_frm.doc.brand + " " + description_value  + " "+cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
-            cur_frm.refresh_field('item_name')
-            cur_frm.set_value('commercial_name_in_german',cur_frm.doc.brand + " " +cur_frm.doc.description_german + " "+ cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
-            cur_frm.refresh_field('commercial_name_in_german')
-            }
-     }   
+    //  before_save(cur_frm){
+    //     if(cur_frm.doc.brand && cur_frm.doc.description && cur_frm.doc.unit_size_volume && cur_frm.doc.unit_measure && cur_frm.doc.description_german){
+    //         let description_value = convertToPlain(cur_frm.doc.description)
+    //         // console.log(description_value)
+    //         cur_frm.set_value('item_name',cur_frm.doc.brand + " " + description_value  + " "+cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
+    //         cur_frm.refresh_field('item_name')
+    //         cur_frm.set_value('commercial_name_in_german',cur_frm.doc.brand + " " +cur_frm.doc.description_german + " "+ cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
+    //         cur_frm.refresh_field('commercial_name_in_german')
+    //         }
+    //  }   
 });
 
 
