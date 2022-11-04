@@ -2,108 +2,109 @@ frappe.ui.form.on('Item', {
 	refresh(frm) {
 		// your code here
 	},
-    assortment_status:function(cur_frm){
-        if(cur_frm.doc.assortment_status == "Listed"){
-            cur_frm.set_value('shopify_published_status','True')
-            cur_frm.set_value('shopify_status','Active')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+    assortment_status:function(frm){
+        if(frm.doc.assortment_status == "Listed"){
+            frm.set_value('shopify_published_status','True')
+            frm.set_value('shopify_status','Active')
+            frm.refresh_field('shopify_published_status','shopify_status')
         }
-        if(cur_frm.doc.assortment_status == "New Listing"){
-            cur_frm.set_value('shopify_published_status','False')
-            cur_frm.set_value('shopify_status','Draft')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "New Listing"){
+            frm.set_value('shopify_published_status','False')
+            frm.set_value('shopify_status','Draft')
+            frm.refresh_field('shopify_published_status','shopify_status')
             
         }
-        if(cur_frm.doc.assortment_status == "Deactivated"){
-            cur_frm.set_value('shopify_published_status','False')
-            cur_frm.set_value('shopify_status','Archived')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "Deactivated"){
+            frm.set_value('shopify_published_status','False')
+            frm.set_value('shopify_status','Archived')
+            frm.refresh_field('shopify_published_status','shopify_status')
             
         }
-        if(cur_frm.doc.assortment_status == "Stop-Status"){
-            cur_frm.set_value('shopify_published_status','False')
-            cur_frm.set_value('shopify_status','Draft')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "Stop-Status"){
+            frm.set_value('shopify_published_status','False')
+            frm.set_value('shopify_status','Draft')
+            frm.refresh_field('shopify_published_status','shopify_status')
         }
-        if(cur_frm.doc.assortment_status == "Out"){
-            cur_frm.set_value('shopify_published_status','True')
-            cur_frm.set_value('shopify_status','Active')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "Out"){
+            frm.set_value('shopify_published_status','True')
+            frm.set_value('shopify_status','Active')
+            frm.refresh_field('shopify_published_status','shopify_status')
         }
-        if(cur_frm.doc.assortment_status == "Temporary Delisted"){
-            cur_frm.set_value('shopify_published_status','False')
-            cur_frm.set_value('shopify_status','Draft')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "Temporary Delisted"){
+            frm.set_value('shopify_published_status','False')
+            frm.set_value('shopify_status','Draft')
+            frm.refresh_field('shopify_published_status','shopify_status')
         }
-        if(cur_frm.doc.assortment_status == "IN"){
-            cur_frm.set_value('shopify_published_status','False')
-            cur_frm.set_value('shopify_status','Draft')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "IN"){
+            frm.set_value('shopify_published_status','False')
+            frm.set_value('shopify_status','Draft')
+            frm.refresh_field('shopify_published_status','shopify_status')
         }
-        if(cur_frm.doc.assortment_status == "Temp Listing"){
-            cur_frm.set_value('shopify_published_status','True')
-            cur_frm.set_value('shopify_status','Active')
-            cur_frm.refresh_field('shopify_published_status','shopify_status')
+        if(frm.doc.assortment_status == "Temp Listing"){
+            frm.set_value('shopify_published_status','True')
+            frm.set_value('shopify_status','Active')
+            frm.refresh_field('shopify_published_status','shopify_status')
         }
     },
     
-	validate(cur_frm){
-	    if(cur_frm.doc.assortment_status =="Deactivated"){
-            cur_frm.set_value('end_date',frappe.datetime.nowdate());
-            cur_frm.refresh_field('end_date');
+	validate(frm){
+	    if(frm.doc.assortment_status =="Deactivated"){
+            frm.set_value('end_date',frappe.datetime.nowdate());
+            frm.refresh_field('end_date');
         }
-        if(cur_frm.doc.units_per_case === 0){
-            var tbl = cur_frm.doc.uoms;
+        if(frm.doc.units_per_case === 0){
+            var tbl = frm.doc.uoms;
                     var i = tbl.length;
                     while (i--)
                     {
-                        if(cur_frm.doc.units_per_case === 0)
+                        if(frm.doc.units_per_case === 0)
                         {
-                            cur_frm.get_field("uoms").grid.grid_rows[i].remove();
+                            frm.get_field("uoms").grid.grid_rows[i].remove();
                         }
                     }
-                    cur_frm.refresh_field("uoms");
+                    frm.refresh_field("uoms");
 	    }  
         
         
         
         // else{
-        //     cur_frm.set_value('item_name',cur_frm.doc.naming_series)
-        //     cur_frm.refresh_field('item_name')
-        //     cur_frm.set_value('commercial_name_in_german',cur_frm.doc.naming_series)
-        //     cur_frm.refresh_field('commercial_name_in_german')
+        //     frm.set_value('item_name',frm.doc.naming_series)
+        //     frm.refresh_field('item_name')
+        //     frm.set_value('commercial_name_in_german',frm.doc.naming_series)
+        //     frm.refresh_field('commercial_name_in_german')
         // }
         
-        if(cur_frm.doc.case_dimension_length != 0 && cur_frm.doc.case_dimension_width != 0 && cur_frm.doc.case_dimension_height != 0){
-            cur_frm.set_value('case_volume_in_l',flt(cur_frm.doc.case_dimension_length*cur_frm.doc.case_dimension_width*cur_frm.doc.case_dimension_height)/1000)
-            cur_frm.refresh_field('case_volume_in_l')
+        if(frm.doc.case_dimension_length != 0 && frm.doc.case_dimension_width != 0 && frm.doc.case_dimension_height != 0){
+            frm.set_value('case_volume_in_l',flt(frm.doc.case_dimension_length*frm.doc.case_dimension_width*frm.doc.case_dimension_height)/1000)
+            frm.refresh_field('case_volume_in_l')
         }
-        if (cur_frm.doc.unit_volume_in_l != 0){
-            cur_frm.set_value('unit_volume_in_l',flt(cur_frm.doc.case_volume_in_l/cur_frm.doc.units_per_case))
-            cur_frm.refresh_field('unit_volume_in_l')
+        
+        if (frm.doc.units_per_case != 0){
+            frm.set_value('unit_volume_in_l',flt(frm.doc.case_volume_in_l/frm.doc.units_per_case))
+            frm.refresh_field('unit_volume_in_l')
         }
         
         
 
 
 	},
-	after_save(cur_frm){
-        cur_frm.doc.uoms.forEach(u =>{
+	after_save(frm){
+        frm.doc.uoms.forEach(u =>{
             if(u.uom =="Case"){
-                u.conversion_factor = cur_frm.doc.units_per_case;
+                u.conversion_factor = frm.doc.units_per_case;
             }
         }); 
         
         
         },
-    //  before_save(cur_frm){
-    //     if(cur_frm.doc.brand && cur_frm.doc.description && cur_frm.doc.unit_size_volume && cur_frm.doc.unit_measure && cur_frm.doc.description_german){
-    //         let description_value = convertToPlain(cur_frm.doc.description)
+    //  before_save(frm){
+    //     if(frm.doc.brand && frm.doc.description && frm.doc.unit_size_volume && frm.doc.unit_measure && frm.doc.description_german){
+    //         let description_value = convertToPlain(frm.doc.description)
     //         // console.log(description_value)
-    //         cur_frm.set_value('item_name',cur_frm.doc.brand + " " + description_value  + " "+cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
-    //         cur_frm.refresh_field('item_name')
-    //         cur_frm.set_value('commercial_name_in_german',cur_frm.doc.brand + " " +cur_frm.doc.description_german + " "+ cur_frm.doc.unit_size_volume + " "+ cur_frm.doc.unit_measure)
-    //         cur_frm.refresh_field('commercial_name_in_german')
+    //         frm.set_value('item_name',frm.doc.brand + " " + description_value  + " "+frm.doc.unit_size_volume + " "+ frm.doc.unit_measure)
+    //         frm.refresh_field('item_name')
+    //         frm.set_value('commercial_name_in_german',frm.doc.brand + " " +frm.doc.description_german + " "+ frm.doc.unit_size_volume + " "+ frm.doc.unit_measure)
+    //         frm.refresh_field('commercial_name_in_german')
     //         }
     //  }   
 });
