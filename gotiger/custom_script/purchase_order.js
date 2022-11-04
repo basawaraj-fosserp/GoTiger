@@ -1,5 +1,12 @@
 frappe.ui.form.on('Purchase Order', {
 	refresh(frm) {
+            frm.add_custom_button(__("Export Item Details"), function() {
+                frappe.route_options = {
+                    purchase_order: frm.doc.name,
+                };
+
+                frappe.set_route("query-report", "Purchase Order Item Details");
+            });
     		frm.add_custom_button('Calculate and Import Required Items', () => {
                 if(!frm.doc.set_warehouse){
                     frappe.throw("Please Set Value In Target Warehouse")
